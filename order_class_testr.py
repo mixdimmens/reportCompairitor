@@ -22,22 +22,30 @@ dj_book = 'OrderDBRead'
 ### DJReport tests ###
 
 dj_report = DJReport(dj_book)
+
 # dj_report.get_sheet()
 # print(dj_report.sheet)
 # print(list(dj_report.sheet.columns))
 
-dj_report.get_data()
-# dj_report.data_pull(['OPO', 'OSO', 'M2 Job Code'])
-# print((dj_report.orders))
+# dj_report.get_data()
+# # dj_report.data_pull(['OPO', 'OSO', 'M2 Job Code'])
+# # print((dj_report.orders))
 
-dj_report.get_order_by_job_code('nhhh')
-print(dj_report.order)
+# dj_report.get_order_by_job_code('nhhh')
+# print(dj_report.order)
+
+dj_report.get_current_orders()
+print(dj_report.orders)
+
+# dj_report.get_job_code_list()
+# print(dj_report.job_code_list)
+
 
 
 
 #### M2Report Tests ####
 
-m2_report = M2Report(m2_book)
+# m2_report = M2Report(m2_book)
 # m2_report.get_sheet()
 # print(m2_report.sheet.columns)
 
@@ -47,8 +55,10 @@ m2_report = M2Report(m2_book)
 
 # m2_report.get_data()
 # print(m2_report.orders)
+
 # m2_report.get_order_by_job_code('Nhqh')
 # print(m2_report.order)
+
 
 
 #### blah ####

@@ -43,8 +43,11 @@ class Orders(object):
     def get_order_by_opo(self, opo):
         self.order = self.orders.loc[self.orders['OPO'].str.contains(opo, case= False, na= False)]
 
-    def get_job_code_list(self):
+    def get_job_code_list(self, dict=True):
         self.job_code_list = self.orders[['M2 Job Code']]
+
+        if dict:
+            self.job_code_list.to_dict()
 
     def get_opo_list(self):
         self.opo_list = self.orders[['OPO']]
