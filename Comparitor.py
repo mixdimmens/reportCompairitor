@@ -27,6 +27,9 @@ def get_m2_current():
     m2_report.get_current_m2_orders(dj_report.job_code_list)
     # print(m2_report.orders)
 
+
+# next up - filter through the orders to compare create list of orders with discrepencies...
+
 # def compare_orders():
 
 
