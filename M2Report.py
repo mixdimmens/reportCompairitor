@@ -9,6 +9,8 @@ class M2Report(Orders):
         cols = ['OPO', 'M2 Job Code', 'Item Description', 'Qty.', 'PO Issue Date', 'Wood', 'Wood Finish', 'Metal / Metal Finish', 'COM / COL', 'COM/COL Recieved', 'DFA Required', 'DFA Sent', 'DFA Approved', 'SFA/STM Required', 'SFA Sent', 'SFA Approved']
         self.data_pull(cols)
 
+    
+
     def __repr__(self):
         return self.orders
 

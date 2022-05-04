@@ -18,5 +18,7 @@ class DJReport(Orders):
     # def get_order_by_opo(self, opo):
     #     self.order = self.orders[self.orders['OPO'].str.contains(opo, case= False, na= False)]
 
+
+
     def __repr__(self):
         return self.orders
