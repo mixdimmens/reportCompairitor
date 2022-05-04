@@ -32,7 +32,7 @@ class Orders(object):
 
     def data_pull(self, cols):
         self.get_sheet()
-        self.orders = self.sheet[self.sheet[cols]]
+        self.orders = self.sheet[cols]
 
     def get_order_by_job_code(self, job_code):
         self.order = self.orders.loc[self.orders['M2 Job Code'].str.contains(job_code, case= False, na=False)]
