@@ -6,9 +6,14 @@ m2_book = 'DakotaJacksonProductionReport2022-04-09'
 dj_book = 'OrderDBRead'
 
 ### Orders Class Tests ###
+
 # orders = Orders(dj_book)
 # orders.get_sheet()
 # print(orders.sheet[['OPO']])
+
+# orders = Orders(m2_book)
+# orders.get_sheet()
+# print(orders.sheet)
 
 
 ### DJReport tests ###
@@ -24,9 +29,16 @@ print((dj_report.orders))
 # print(dj_report.order)
 
 
-### M2Report Tests ###
+#### M2Report Tests ####
 
-# m2_report = M2Report(m2_book)
+m2_report = M2Report(m2_book)
+# m2_report.get_sheet()
+# print(m2_report.sheet.columns)
+
+
+# m2_report.data_pull(['OPO', 'DF quote ', 'M2 Job Code', 'Item Description', 'Qty.','DFA Required', 'DFA Sent', 'DFA Approved', 'Status', 'PO Issue Date', 'FWO #', 'FWO issue Date', 'Wood', 'Wood Finish', 'Metal / Metal Finish', 'SFA/STM Required', 'SFA Sent', 'SFA Approved','COM / COL', 'COM/COL Recieved','Inspection photo sent for approval (DATE)', 'Ex-Factory Date','ship to (East coast, West coast)', 'Notes', ''])
+# print(m2_report.orders)
+
 # m2_report.get_data()
 # print(m2_report.orders)
 # m2_report.get_order_by_job_code('Nhqh')
