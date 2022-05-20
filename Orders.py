@@ -43,8 +43,14 @@ class Orders(object):
     def get_order_by_opo(self, opo):
         self.order = self.orders.loc[self.orders['OPO'].str.contains(opo, case= False, na= False)]
 
-    def get_job_code_list(self, dict=True):
-        self.job_code_list = self.orders[['M2 Job Code']]
+    def get_job_code_list(self, shipped=True, dict=True):
+        if shipped:
+            self.noShippedOrders = self.orders[self.orders['Status'] != 'SHIPPED']
+            self.job_code_list = self.noShippedOrders[['M2 Job Code']]
+            print('wiggity')
+        else:             
+            self.job_code_list = self.orders[['M2 Job Code']]
+            print('wack')
 
         if dict:
             self.job_code_list.to_dict()
