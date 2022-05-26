@@ -1,3 +1,5 @@
+# import pkg_resources
+# pkg_resources.require("pandas==1.4.2")
 import pandas as pd
 import gspread
 import re

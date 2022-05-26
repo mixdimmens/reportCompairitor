@@ -1,6 +1,9 @@
 from Orders import Orders
 from M2Report import M2Report
 from DJReport import DJReport
+# import pkg_resources
+# pkg_resources.require("pandas==1.4.2")
+# import pandas as pd
 
 m2_book = 'DakotaJacksonProductionReport2022-04-09'
 dj_book = 'OrderDBRead'
@@ -35,7 +38,7 @@ dj_report = DJReport(dj_book)
 # print(dj_report.order)
 
 dj_report.get_current_orders()
-# print(dj_report.orders)
+print(dj_report.orders)
 
 # dj_report.get_job_code_list()
 # print(dj_report.job_code_list)
@@ -72,6 +75,9 @@ m2_report.get_current_m2_orders(dj_report.orders['M2 Job Code'])
 #### blah ####
 
 # print(dj_report.orders)
-# print(m2_report.m2_current_orders)
-print(dj_report.orders.compare(m2_report.m2_current_orders))
-# print(dj_report.orders.compare(m2_report.m2_current_orders))
+print(m2_report.m2_current_orders)
+# compareTable = dj_report.orders.compare(m2_report.m2_current_orders)
+# print(compareTable)
+# # print(dj_report.orders.compare(m2_report.m2_current_orders))
+
+# print(pd.__version__)
