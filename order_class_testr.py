@@ -88,4 +88,4 @@ dj_book = 'OrderDBRead'
 #### Comparitor tests ####
 
 compairitor = Compairitor(dj_book, m2_book)
-compairitor.compare_lines()
+compairitor.compare_lines(True)
