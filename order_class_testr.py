@@ -1,12 +1,12 @@
 from Orders import Orders
 from M2Report import M2Report
 from DJReport import DJReport
-from Comparitor import Compairitor
+from Comparitor import Comparator
 # import pkg_resources
 # pkg_resources.require("pandas==1.4.2")
 # import pandas as pd
 
-m2_book = 'DakotaJacksonProductionReport2022-04-09'
+m2_book = 'DakotaJacksonProductionReport2022-05-21'
 dj_book = 'OrderDBRead'
 
 
@@ -87,5 +87,6 @@ dj_book = 'OrderDBRead'
 
 #### Comparitor tests ####
 
-compairitor = Compairitor(dj_book, m2_book)
-compairitor.compare_lines(True)
+comparator = Comparator(dj_book, m2_book)
+comparator.compare_lines(True)
+print(comparator)
