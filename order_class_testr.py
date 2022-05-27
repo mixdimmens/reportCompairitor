@@ -1,6 +1,7 @@
 from Orders import Orders
 from M2Report import M2Report
 from DJReport import DJReport
+from Comparitor import Compairitor
 # import pkg_resources
 # pkg_resources.require("pandas==1.4.2")
 # import pandas as pd
@@ -24,7 +25,7 @@ dj_book = 'OrderDBRead'
 
 ### DJReport tests ###
 
-dj_report = DJReport(dj_book)
+# dj_report = DJReport(dj_book)
 
 # dj_report.get_sheet()
 # print(dj_report.sheet)
@@ -37,8 +38,8 @@ dj_report = DJReport(dj_book)
 # dj_report.get_order_by_job_code('nhhh')
 # print(dj_report.order)
 
-dj_report.get_current_orders()
-print(dj_report.orders)
+# dj_report.get_current_orders()
+# print(dj_report.orders.columns)
 
 # dj_report.get_job_code_list()
 # print(dj_report.job_code_list)
@@ -48,7 +49,7 @@ print(dj_report.orders)
 
 #### M2Report Tests ####
 
-m2_report = M2Report(m2_book)
+# m2_report = M2Report(m2_book)
 # m2_report.get_sheet()
 # print(m2_report.sheet.columns)
 
@@ -62,7 +63,7 @@ m2_report = M2Report(m2_book)
 # m2_report.get_order_by_job_code('Nhqh')
 # print(m2_report.order)
 
-m2_report.get_current_m2_orders(dj_report.orders['M2 Job Code'])
+# m2_report.get_current_m2_orders(dj_report.orders['M2 Job Code'])
 # dj_report.get_job_code_list()
 # print(dj_report.noShippedOrders)
 # print(dj_report.job_code_list)
@@ -75,9 +76,16 @@ m2_report.get_current_m2_orders(dj_report.orders['M2 Job Code'])
 #### blah ####
 
 # print(dj_report.orders)
-print(m2_report.m2_current_orders)
+# print(m2_report.m2_current_orders.columns)
 # compareTable = dj_report.orders.compare(m2_report.m2_current_orders)
 # print(compareTable)
 # # print(dj_report.orders.compare(m2_report.m2_current_orders))
 
 # print(pd.__version__)
+
+
+
+#### Comparitor tests ####
+
+compairitor = Compairitor(dj_book, m2_book)
+compairitor.compare_lines()
