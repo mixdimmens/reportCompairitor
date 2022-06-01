@@ -88,5 +88,6 @@ dj_book = 'OrderDBRead'
 #### Comparitor tests ####
 
 comparator = Comparator(dj_book, m2_book)
-comparator.compare_lines(True)
-print(comparator)
+comparator.compare_lines()
+comparator.upload_reports()
+# print(comparator)

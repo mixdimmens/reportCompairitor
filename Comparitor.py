@@ -1,17 +1,21 @@
 from DJReport import DJReport
 from M2Report import M2Report
 import pandas as pd
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
+
 
 m2_book = 'DakotaJacksonProductionReport2022-04-09'
 dj_book = 'OrderDBRead'
 
 class Comparator():
 
-    def __init__(self, dj_book, m2_book):
+    def __init__(self, dj_book, m2_book, report_book='M2-DJ_report_compairison'):
         self.dj_book = dj_book
         self.m2_book = m2_book
         self.dj_workbook = DJReport(self.dj_book)
         self.m2_workbook = M2Report(self.m2_book)
+        self.report_book = report_book
         self.comparison_report = pd.DataFrame()
 
     def get_reports(self):
@@ -20,8 +24,8 @@ class Comparator():
 
     def compare_items(self, aa, bb):
         match_index = 0
-        item_a = str(aa).lower().strip().split()
-        item_b = str(bb).lower().strip().split()
+        item_a = str(aa).lower().replace("\\", "").strip("()/ -").split()
+        item_b = str(bb).lower().replace("\\", "").strip("()/ -").split()
 
         for word in item_a:
             if word in item_b:
@@ -44,9 +48,9 @@ class Comparator():
 
                 m2_row = self.m2_workbook.m2_current_orders.loc[self.m2_workbook.m2_current_orders['OPO'] == row['OPO']].values.tolist()
 
-                compare_dict = {'OPO': row['OPO'], 'M2 Job Code': row['M2 Job Code'], 'Item Description': row['Item Description'], 'Item Description - M2': m2_row[0][2], 'DJ Qty.': row['Qty.'], 'M2 Qty.': m2_row[0][3], 'DFA Required - DJ': row['DFA Required'], 'DFA Required - M2': m2_row[0][10], 'DFA Approved - DJ': row['DFA Approved'], 'DFA Approved - M2': m2_row[0][12], 'SFA/STM Required - DJ': row['SFA/STM Required'], 'SFA/STM Required - M2': m2_row[0][13], 'SFA Sent': m2_row[0][14], 'SFA Approved - DJ': row['SFA Approved'], 'SFA Approved - M2': m2_row[0][15],'COM/COL Required': row['COM/COL Required'], 'COM/COL Recieved': m2_row[0][9], 'match index': self.compare_items(row['Item Description'], m2_row[0][2])}
+                compare_dict = {'OPO': row['OPO'], 'M2 Job Code': row['M2 Job Code'], 'Item Description': row['Item Description'], 'Item Description - M2': m2_row[0][2], 'DJ Qty.': row['Qty.'], 'M2 Qty.': m2_row[0][3], 'DFA Required - DJ': row['DFA Required'], 'DFA Required - M2': m2_row[0][10], 'DFA Approved - DJ': row['DFA Approved'], 'DFA Approved - M2': m2_row[0][12], 'SFA/STM Required - DJ': row['SFA/STM Required'], 'SFA/STM Required - M2': m2_row[0][13], 'SFA Sent': m2_row[0][14], 'SFA Approved - DJ': row['SFA Approved'], 'SFA Approved - M2': m2_row[0][15],'COM/COL Required': row['COM/COL Required'], 'COM/COL Recieved': m2_row[0][9], 'match index': self.compare_items(row['Item Description'].title(), m2_row[0][2].title())}
 
-                if compare_dict['match index'] > 0:
+                if compare_dict['match index'] > 1:
                     discrepencies.append(compare_dict.values())
                 else: 
                     no_match.append(compare_dict.values())
@@ -61,7 +65,33 @@ class Comparator():
             self.compareFrame.to_csv(filepath_compare)
             self.noMatchFrame.to_csv(filepath_noMatch)
 
-        print(self.compareFrame)
+    # method to upload reports to report_book
+    def upload_reports(self):
+        scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
+
+        # add credentials to the account - json file must be located via at least a relative path
+        creds = ServiceAccountCredentials.from_json_keyfile_name('/Users/maximdiamond/Code/DJi/scripts/pdfScripts/production-report-api-739f8c22e6b8.json', scope)
+
+        # authorize the clientsheet 
+        client = gspread.authorize(creds)
+
+        self.report_book = client.open(self.report_book)
+        try:
+            self.compared_report = self.report_book.get_worksheet(0)
+            self.no_match_report = self.report_book.get_worksheet(1)
+            self.compared_report.clear()
+            self.no_match_report.clear()
+        except Exception as eee:
+            print('no workey :\(')
+            print(eee)
+
+        try:
+            self.compared_report.update([self.compareFrame.columns.tolist()] + self.compareFrame.values.tolist())
+            self.no_match_report.update([self.noMatchFrame.columns.tolist()] + self.noMatchFrame.values.tolist())
+        except Exception as ee:
+            print(self.report_book)
+            print('no workey :\(')
+            print(ee)
 
     def __repr__(self):
         return str(self.compareFrame)
