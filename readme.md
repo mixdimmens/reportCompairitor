@@ -2,7 +2,9 @@
 
 Compares reports from vendors with internal reports to point out discrepencies, thereby reducing errors and sreamlining reporting and communication. 
 
-The scripts are currently set up to work with Production reports sent by M2 to DJI. It is very much a work in progress. 
+The scripts are currently designed to work with Production reports sent by M2 to DJI, but could be generalized. Future iterations may make general applications for compairing dissimilarly formated spreadsheets more straightforward.  
+
+It is very much a work in progress. 
 
 ## Quick Start
 
@@ -20,4 +22,5 @@ An overview of how to use the scripts.
 ## W.I.P
 
 - The script currently does not differentiate between invididual lines that have the same order number. An approach to improving this needs to be determined. 
-- It would be more streamlined to have the script pdate an existing google sheet instead of export to csv. This should be implimented in the future. 
+- It would be more streamlined to have the script pdate an existing google sheet instead of export to csv. This should be implimented in the future. **implemented as of 2022-06-01**
+- Have the script replace vendor's 'yes' or 'no' values with booleans. 

@@ -33,6 +33,27 @@ class Comparator():
 
         return match_index
 
+    def yes_no_to_bool(self, in_string):
+        yesses = ['yes', 'standard', 'YES', 'Yes']
+        nos = ['no']
+
+        if type(in_string) != str:
+            try:
+                in_string = str(in_string)
+            except Exception as ee:
+                print('yes_no_to_bool\'s string conversion raised an error')
+                print(ee)
+
+        in_string = in_string.lower().strip() 
+                
+        if in_string in yesses:
+            return True
+        elif in_string in nos:
+            return False
+        else:
+            print('yes_no_to_bool input uncaught')
+            return in_string
+
         
 
     def compare_lines(self, export_csv=False):
@@ -48,7 +69,7 @@ class Comparator():
 
                 m2_row = self.m2_workbook.m2_current_orders.loc[self.m2_workbook.m2_current_orders['OPO'] == row['OPO']].values.tolist()
 
-                compare_dict = {'OPO': row['OPO'], 'M2 Job Code': row['M2 Job Code'], 'Item Description': row['Item Description'], 'Item Description - M2': m2_row[0][2], 'DJ Qty.': row['Qty.'], 'M2 Qty.': m2_row[0][3], 'DFA Required - DJ': row['DFA Required'], 'DFA Required - M2': m2_row[0][10], 'DFA Approved - DJ': row['DFA Approved'], 'DFA Approved - M2': m2_row[0][12], 'SFA/STM Required - DJ': row['SFA/STM Required'], 'SFA/STM Required - M2': m2_row[0][13], 'SFA Sent': m2_row[0][14], 'SFA Approved - DJ': row['SFA Approved'], 'SFA Approved - M2': m2_row[0][15],'COM/COL Required': row['COM/COL Required'], 'COM/COL Recieved': m2_row[0][9], 'match index': self.compare_items(row['Item Description'].title(), m2_row[0][2].title())}
+                compare_dict = {'OPO': row['OPO'], 'M2 Job Code': row['M2 Job Code'], 'Item Description': row['Item Description'], 'Item Description - M2': m2_row[0][2], 'DJ Qty.': row['Qty.'], 'M2 Qty.': m2_row[0][3], 'DFA Required - DJ': row['DFA Required'], 'DFA Required - M2': self.yes_no_to_bool(m2_row[0][10]), 'DFA Approved - DJ': row['DFA Approved'], 'DFA Approved - M2': m2_row[0][12], 'SFA/STM Required - DJ': row['SFA/STM Required'], 'SFA/STM Required - M2': self.yes_no_to_bool(m2_row[0][13]), 'SFA Sent': m2_row[0][14], 'SFA Approved - DJ': row['SFA Approved'], 'SFA Approved - M2': m2_row[0][15],'COM/COL Required': row['COM/COL Required'], 'COM/COL Recieved': m2_row[0][9], 'match index': self.compare_items(row['Item Description'].title(), m2_row[0][2].title())}
 
                 if compare_dict['match index'] > 1:
                     discrepencies.append(compare_dict.values())
