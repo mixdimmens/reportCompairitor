@@ -35,7 +35,7 @@ class Comparator():
 
     def yes_no_to_bool(self, in_string):
         yesses = ['yes', 'standard', 'YES', 'Yes']
-        nos = ['no']
+        nos = ['no', 'No']
 
         if type(in_string) != str:
             try:
