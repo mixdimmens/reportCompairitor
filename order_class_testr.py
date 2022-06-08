@@ -6,7 +6,7 @@ from Comparitor import Comparator
 # pkg_resources.require("pandas==1.4.2")
 # import pandas as pd
 
-m2_book = 'DakotaJacksonProductionReport2022-05-21'
+m2_book = 'DakotaJacksonProductionReport2022-06-04'
 dj_book = 'OrderDBRead'
 
 
