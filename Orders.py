@@ -11,7 +11,7 @@ class Orders(object):
         self.workbook = workbook
         self.sheet_index = sheet_index
     
-    def get_sheet(self):
+    def get_sheet(self, escape=True):
         # define the scope
         scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
 
@@ -29,8 +29,9 @@ class Orders(object):
         for col in self.sheet:
             self.sheet[col] = self.sheet[col].apply(str)
         
-        for col in self.sheet:
-            self.sheet[col] = self.sheet[col].apply(lambda xx : re.escape(xx))
+        if escape:
+            for col in self.sheet:
+                self.sheet[col] = self.sheet[col].apply(lambda xx : re.escape(xx))
 
     def data_pull(self, cols):
         self.get_sheet()

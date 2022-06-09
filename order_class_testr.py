@@ -1,6 +1,6 @@
-from Orders import Orders
-from M2Report import M2Report
-from DJReport import DJReport
+# from Orders import Orders
+# from M2Report import M2Report
+# from DJReport import DJReport
 from Comparitor import Comparator
 # import pkg_resources
 # pkg_resources.require("pandas==1.4.2")
@@ -89,5 +89,7 @@ dj_book = 'OrderDBRead'
 
 comparator = Comparator(dj_book, m2_book)
 comparator.compare_lines()
+comparator.dfa_mismatch_report()
+# print(comparator.multi_item_orders)
 comparator.upload_reports()
 # print(comparator)
